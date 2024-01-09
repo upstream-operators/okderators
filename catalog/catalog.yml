@@ -1,0 +1,378 @@
+---
+defaultChannel: stable-v1
+name: gitops-operator
+schema: olm.package
+---
+entries:
+- name: gitops-operator.v1.8.0
+name: stable-v1
+package: gitops-operator
+schema: olm.channel
+---
+image: ghcr.io/upstream-operators/images/gitops-operator-bundle:v1.8.0
+name: gitops-operator.v1.8.0
+package: gitops-operator
+properties:
+- type: olm.gvk
+  value:
+    group: argoproj.io
+    kind: AnalysisRun
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: argoproj.io
+    kind: AnalysisTemplate
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: argoproj.io
+    kind: AppProject
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: argoproj.io
+    kind: Application
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: argoproj.io
+    kind: ApplicationSet
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: argoproj.io
+    kind: ArgoCD
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: argoproj.io
+    kind: ArgoCD
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: argoproj.io
+    kind: ClusterAnalysisTemplate
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: argoproj.io
+    kind: Experiment
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: argoproj.io
+    kind: Rollout
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: argoproj.io
+    kind: RolloutManager
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: pipelines.openshift.io
+    kind: GitopsService
+    version: v1alpha1
+- type: olm.package
+  value:
+    packageName: gitops-operator
+    version: 1.8.0
+- type: olm.csv.metadata
+  value:
+    annotations:
+      alm-examples: |-
+        [
+          {
+            "apiVersion": "argoproj.io/v1alpha1",
+            "kind": "AppProject",
+            "metadata": {
+              "name": "example"
+            },
+            "spec": null
+          },
+          {
+            "apiVersion": "argoproj.io/v1alpha1",
+            "kind": "Application",
+            "metadata": {
+              "name": "example"
+            },
+            "spec": null
+          },
+          {
+            "apiVersion": "argoproj.io/v1alpha1",
+            "kind": "ApplicationSet",
+            "metadata": {
+              "name": "example"
+            },
+            "spec": null
+          },
+          {
+            "apiVersion": "argoproj.io/v1alpha1",
+            "kind": "ArgoCD",
+            "metadata": {
+              "name": "argocd"
+            },
+            "spec": {
+              "controller": {
+                "resources": {
+                  "limits": {
+                    "cpu": "2000m",
+                    "memory": "2048Mi"
+                  },
+                  "requests": {
+                    "cpu": "250m",
+                    "memory": "1024Mi"
+                  }
+                }
+              },
+              "ha": {
+                "enabled": false,
+                "resources": {
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "256Mi"
+                  },
+                  "requests": {
+                    "cpu": "250m",
+                    "memory": "128Mi"
+                  }
+                }
+              },
+              "rbac": {
+                "defaultPolicy": "",
+                "policy": "g, system:cluster-admins, role:admin\n",
+                "scopes": "[groups]"
+              },
+              "redis": {
+                "resources": {
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "256Mi"
+                  },
+                  "requests": {
+                    "cpu": "250m",
+                    "memory": "128Mi"
+                  }
+                }
+              },
+              "repo": {
+                "resources": {
+                  "limits": {
+                    "cpu": "1000m",
+                    "memory": "1024Mi"
+                  },
+                  "requests": {
+                    "cpu": "250m",
+                    "memory": "256Mi"
+                  }
+                }
+              },
+              "resourceExclusions": "- apiGroups:\n  - tekton.dev\n  clusters:\n  - '*'\n  kinds:\n  - TaskRun\n  - PipelineRun        \n",
+              "server": {
+                "resources": {
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "256Mi"
+                  },
+                  "requests": {
+                    "cpu": "125m",
+                    "memory": "128Mi"
+                  }
+                },
+                "route": {
+                  "enabled": true
+                }
+              },
+              "sso": {
+                "dex": {
+                  "openShiftOAuth": true,
+                  "resources": {
+                    "limits": {
+                      "cpu": "500m",
+                      "memory": "256Mi"
+                    },
+                    "requests": {
+                      "cpu": "250m",
+                      "memory": "128Mi"
+                    }
+                  }
+                },
+                "provider": "dex"
+              }
+            }
+          },
+          {
+            "apiVersion": "pipelines.openshift.io/v1alpha1",
+            "kind": "GitopsService",
+            "metadata": {
+              "name": "gitopsservice-sample"
+            },
+            "spec": null
+          }
+        ]
+      capabilities: Deep Insights
+      console.openshift.io/plugins: '["gitops-plugin"]'
+      containerImage: quay.io/redhat-developer/gitops-operator
+      description: Enables teams to adopt GitOps principles for managing cluster configurations
+        and application delivery across hybrid multi-cluster Kubernetes environments.
+      operatorframework.io/cluster-monitoring: "true"
+      operatorframework.io/suggested-namespace: openshift-gitops-operator
+      operators.openshift.io/infrastructure-features: '["disconnected"]'
+      operators.operatorframework.io/builder: operator-sdk-v1.10.0+git
+      operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
+      repository: https://github.com/redhat-developer/gitops-operator
+      support: Red Hat
+    apiServiceDefinitions: {}
+    crdDescriptions:
+      owned:
+      - kind: AnalysisRun
+        name: analysisruns.argoproj.io
+        version: v1alpha1
+      - kind: AnalysisTemplate
+        name: analysistemplates.argoproj.io
+        version: v1alpha1
+      - description: An Application is a group of Kubernetes resources as defined
+          by a manifest.
+        displayName: Application
+        kind: Application
+        name: applications.argoproj.io
+        version: v1alpha1
+      - description: ApplicationSet is the representation of an ApplicationSet controller
+          deployment.
+        kind: ApplicationSet
+        name: applicationsets.argoproj.io
+        version: v1alpha1
+      - description: An AppProject is a logical grouping of Argo CD Applications.
+        displayName: AppProject
+        kind: AppProject
+        name: appprojects.argoproj.io
+        version: v1alpha1
+      - description: Argo CD is the representation of an Argo CD deployment.
+        displayName: Argo CD
+        kind: ArgoCD
+        name: argocds.argoproj.io
+        resources:
+        - kind: ArgoCD
+          name: ""
+          version: v1alpha1
+        - kind: ConfigMap
+          name: ""
+          version: v1
+        - kind: CronJob
+          name: ""
+          version: v1
+        - kind: Deployment
+          name: ""
+          version: v1
+        - kind: Ingress
+          name: ""
+          version: v1
+        - kind: Job
+          name: ""
+          version: v1
+        - kind: PersistentVolumeClaim
+          name: ""
+          version: v1
+        - kind: Pod
+          name: ""
+          version: v1
+        - kind: Prometheus
+          name: ""
+          version: v1
+        - kind: ReplicaSet
+          name: ""
+          version: v1
+        - kind: Route
+          name: ""
+          version: v1
+        - kind: Secret
+          name: ""
+          version: v1
+        - kind: Service
+          name: ""
+          version: v1
+        - kind: ServiceMonitor
+          name: ""
+          version: v1
+        - kind: StatefulSet
+          name: ""
+          version: v1
+        version: v1alpha1
+      - kind: ArgoCD
+        name: argocds.argoproj.io
+        version: v1beta1
+      - kind: ClusterAnalysisTemplate
+        name: clusteranalysistemplates.argoproj.io
+        version: v1alpha1
+      - kind: Experiment
+        name: experiments.argoproj.io
+        version: v1alpha1
+      - description: GitopsService is the Schema for the gitopsservices API
+        displayName: Gitops Service
+        kind: GitopsService
+        name: gitopsservices.pipelines.openshift.io
+        version: v1alpha1
+      - kind: RolloutManager
+        name: rolloutmanagers.argoproj.io
+        version: v1alpha1
+      - kind: Rollout
+        name: rollouts.argoproj.io
+        version: v1alpha1
+    description: "Red Hat OpenShift GitOps is a declarative continuous delivery platform
+      based on [Argo CD](https://argoproj.github.io/argo-cd/). It enables teams to
+      adopt GitOps principles for managing cluster configurations and automating secure
+      and repeatable application delivery across hybrid multi-cluster Kubernetes environments.
+      Following GitOps and infrastructure as code principles, you can store the configuration
+      of clusters and applications in Git repositories and use Git workflows to roll
+      them out to the target clusters.\n\n## Features\n* Automated install and upgrades
+      of Argo CD\n* Manual and automated configuration sync from Git repositories
+      to target OpenShift and Kubernetes clusters\n* Support for the Helm and Kustomize
+      templating tools\n* Configuration drift detection and visualization on live
+      clusters\n* Audit trails of rollouts to the clusters\n* Monitoring and logging
+      integration with OpenShift\n* Automated GitOps bootstrapping using Tekton and
+      Argo CD with [GitOps Application Manager CLI](https://github.com/redhat-developer/kam)\n\n##
+      Components\n* Argo CD 2.7.6\n* GitOps Application Manager CLI ([download](https://github.com/redhat-developer/kam/releases))\n\n##
+      How to Install \nAfter installing the OpenShift GitOps operator, an instance
+      \ of Argo CD is installed in the `openshift-gitops` namespace which has sufficent
+      privileges for managing cluster configurations. You can create additional Argo
+      CD instances using the `ArgoCD` custom resource within the desired namespaces.\n```yaml\napiVersion:
+      argoproj.io/v1alpha1\nkind: ArgoCD\nmetadata:\n  name: argocd\nspec:\n  server:\n
+      \   route:\n      enabled: true\n```\n\nOpenShift GitOps is a layered product
+      on top of OpenShift that enables teams to adopt GitOps principles for managing
+      cluster configurations and automating secure and repeatable application delivery
+      across hybrid multi-cluster Kubernetes environments. OpenShift GitOps is built
+      around Argo CD as the core upstream project and assists customers to establish
+      an end-to-end application delivery workflow on GitOps principles.\n"
+    displayName: Red Hat OpenShift GitOps
+    installModes:
+    - supported: false
+      type: OwnNamespace
+    - supported: false
+      type: SingleNamespace
+    - supported: false
+      type: MultiNamespace
+    - supported: true
+      type: AllNamespaces
+    keywords:
+    - devtools
+    - gitops
+    - pipelines
+    links:
+    - name: Day 1 Operations
+      url: https://github.com/redhat-developer/kam/tree/master/docs/journey/day1
+    - name: Day 2 Operations
+      url: https://github.com/redhat-developer/kam/tree/master/docs/journey/day2
+    maintainers:
+    - email: shbose@redhat.com
+      name: shoubhik
+    maturity: alpha
+    provider:
+      name: Red Hat Inc
+relatedImages:
+- image: ghcr.io/upstream-operators/images/gitops-operator-bundle:v1.8.0
+  name: ""
+- image: quay.io/redhat-developer/gitops-operator:latest
+  name: ""
+- image: registry.redhat.io/openshift4/ose-kube-rbac-proxy:v4.13
+  name: ""
+schema: olm.bundle
